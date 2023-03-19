@@ -1,0 +1,19 @@
+--Create a clothing store database.
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, name TEXT, color TEXT, price INTEGER, quantity INTEGER, size TEXT);
+
+INSERT INTO store VALUES (1, "shirt", "green", 10, 2, "Large");
+INSERT INTO store VALUES (2, "pants","blue",20, 5, "Large");
+INSERT INTO store VALUES (3, "dress", "floral", 15, 10, "Large");
+INSERT INTO store VALUES (4, "socks", "weeds", 5, 10, "One Size");
+INSERT INTO store VALUES (5, "undies", "multi", 15, 5, "Six");
+INSERT INTO store VALUES (6, "bras", "white", 20, 5, "C");
+INSERT INTO store VALUES (7, "headbands", "multi", 10, 5, "One size");
+
+--Display the database ordered by price.
+
+SELECT * from store ORDER by price;
+
+--Display total quatity of items in store.
+
+SELECT SUM(quantity) FROM store;
