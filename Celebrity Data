@@ -1,0 +1,88 @@
+/* Create table about the people and what they do here */
+CREATE TABLE celebs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER,
+    type TEXT);
+    
+INSERT INTO celebs(name, age, type) VALUES ("Beyonce", 41, "singer");
+INSERT INTO celebs (name, age, type) VALUES ("Brandy", 44, "actress");
+INSERT INTO celebs(name, age, type) VALUES ("Idris Elba", 50, "actor");
+INSERT INTO celebs(name, age, type) VALUES ("RuPaul", 62, "dragqueen");
+INSERT INTO celebs (name, age, type) VALUES ("Erykah Badu", 52, "singer");
+
+CREATE TABLE iconic (
+    id INTEGER PRIMARY KEY,
+    celeb_id INTEGER,
+    type TEXT,
+    title TEXT);
+
+INSERT INTO iconic (celeb_id, type, title) VALUES (2, "tv show", "Moesha");
+INSERT INTO iconic (celeb_id, type, title) VALUES (1, "album", "Lemonade");
+INSERT INTO iconic (celeb_id, type, title) VALUES (4, "tv show", "RuPaul's Drag Race");
+INSERT INTO iconic (celeb_id, type, title) VALUES (3, "tv show", "Luther");
+INSERT INTO iconic (celeb_id, type, title) VALUES (5, "album", "Baduizm");
+    
+CREATE TABLE scandals (
+    id INTEGER PRIMARY KEY,
+    celeb_id INTEGER,
+    name TEXT);
+    
+INSERT INTO scandals (celeb_id, name) VALUES (1, "elevator");
+INSERT INTO scandals (celeb_id, name) VALUES (2, "husband");
+INSERT INTO scandals (celeb_id, name) VALUES (3, "Carmen Carrera");
+INSERT INTO scandals (celeb_id, name) VALUES (5, "Window Seat");
+
+CREATE TABLE origins (
+    id INTEGER PRIMARY KEY,
+    celeb_id INTEGER,
+    born TEXT);
+
+INSERT INTO origins (celeb_id, born) VALUES (1, "Texas");
+INSERT into origins (celeb_id, born) VALUES (2, "California");
+INSERT into origins (celeb_id, born) VALUES (3, "UK");
+INSERT into origins (celeb_id, born) VALUES (4, "California");
+INSERT into origins (celeb_id, born) VALUES (5, "Texas");
+
+CREATE TABLE collabs (
+    id INTEGER PRIMARY KEY,
+    celeb1_id INTEGER,
+    celeb2_id INTEGER,
+    title TEXT);
+    
+INSERT INTO collabs (celeb1_id, celeb2_id, title) VALUES (1, 3, "Obsessed");
+INSERT INTO collabs (celeb1_id, celeb2_id, title) VALUEs (2, 5, "BET Ladies Cypher");
+INSERT INTO collabs (celeb1_id, celeb2_id, title) VALUES (3, 5, "They Die by Dawn");
+
+/*Show Celebrity Name, Celebrity Type & Title of Their Most Iconic Work*/
+
+SELECT celebs.name, celebs.type, iconic.title
+    FROM celebs
+    JOIN iconic
+    ON celebs.id = celeb_id;
+    
+/*Is there a celebrity who wasn't involved in a scandal?*/
+
+SELECT celebs.name, scandals.name
+    FROM celebs
+    LEFT OUTER JOIN scandals
+    ON celebs.id = celeb_id;
+    
+/*Any celebrities born in the same location?*/
+
+SELECT celebs.name, origins.born
+    FROM celebs
+    JOIN origins
+    ON celebs.id = celeb_id;
+ 
+/*Which celebrities have collaborated on which projects?*/
+
+SELECT a.name AS celeb1, b.name AS celeb2, collabs.title as collaboration
+    FROM collabs
+    JOIN celebs a
+    ON celeb1_id = a.id
+    JOIN celebs b
+    ON celeb2_id = b.id;
+    
+    
+    
